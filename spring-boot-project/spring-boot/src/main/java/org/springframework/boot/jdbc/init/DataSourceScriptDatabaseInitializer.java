@@ -21,6 +21,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer;
@@ -38,13 +41,15 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
  */
 public class DataSourceScriptDatabaseInitializer extends AbstractScriptDatabaseInitializer {
 
+	private static final Log logger = LogFactory.getLog(DataSourceScriptDatabaseInitializer.class);
+
 	private final DataSource dataSource;
 
 	/**
 	 * Creates a new {@link DataSourceScriptDatabaseInitializer} that will initialize the
 	 * given {@code DataSource} using the given settings.
 	 * @param dataSource data source to initialize
-	 * @param settings initialization settings
+	 * @param settings the initialization settings
 	 */
 	public DataSourceScriptDatabaseInitializer(DataSource dataSource, DatabaseInitializationSettings settings) {
 		super(settings);
@@ -61,7 +66,13 @@ public class DataSourceScriptDatabaseInitializer extends AbstractScriptDatabaseI
 
 	@Override
 	protected boolean isEmbeddedDatabase() {
-		return EmbeddedDatabaseConnection.isEmbedded(this.dataSource);
+		try {
+			return EmbeddedDatabaseConnection.isEmbedded(this.dataSource);
+		}
+		catch (Exception ex) {
+			logger.debug("Could not determine if datasource is embedded", ex);
+			return false;
+		}
 	}
 
 	@Override

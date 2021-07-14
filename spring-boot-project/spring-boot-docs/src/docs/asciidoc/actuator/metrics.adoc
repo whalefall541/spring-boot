@@ -586,6 +586,13 @@ Details are published under the `log4j2.events.` or `logback.events.` meter name
 
 
 
+[[actuator.metrics.supported.tasks]]
+==== Task Execution and Scheduling Metrics
+Auto-configuration enables the instrumentation of all available `ThreadPoolTaskExecutor` and `ThreadPoolTaskScheduler` beans, as long as the underling `ThreadPoolExecutor` is available.
+Metrics are tagged by the name of the executor that is derived from the bean name.
+
+
+
 [[actuator.metrics.supported.spring-mvc]]
 ==== Spring MVC Metrics
 Auto-configuration enables the instrumentation of all requests handled by Spring MVC controllers and functional handlers.
@@ -621,7 +628,7 @@ To add to the default tags, provide one or more ``@Bean``s that implement `WebMv
 To replace the default tags, provide a `@Bean` that implements `WebMvcTagsProvider`.
 
 TIP: In some cases, exceptions handled in Web controllers are not recorded as request metrics tags.
-Applications can opt-in and record exceptions by <<features#features.developing-web-applications.spring-mvc.error-handling, setting handled exceptions as request attributes>>.
+Applications can opt-in and record exceptions by <<web#web.servlet.spring-mvc.error-handling, setting handled exceptions as request attributes>>.
 
 
 
@@ -660,7 +667,7 @@ To add to the default tags, provide one or more ``@Bean``s that implement `WebFl
 To replace the default tags, provide a `@Bean` that implements `WebFluxTagsProvider`.
 
 TIP: In some cases, exceptions handled in controllers and handler functions are not recorded as request metrics tags.
-Applications can opt-in and record exceptions by <<features#features.developing-web-applications.spring-webflux.error-handling, setting handled exceptions as request attributes>>.
+Applications can opt-in and record exceptions by <<web#web.reactive.webflux.error-handling, setting handled exceptions as request attributes>>.
 
 
 
@@ -941,6 +948,13 @@ To disable the auto-configured connection pool metrics, set the following proper
 	      connectionpool:
 	        enabled: false
 ----
+
+
+
+[[actuator.metrics.supported.jetty]]
+==== Jetty Metrics
+Auto-configuration will bind metrics for Jetty's `ThreadPool` using Micrometer's `JettyServerThreadPoolMetrics`.
+Metrics for Jetty's `Connector`s are bound using Micrometer's `JettyConnectionMetrics` and, in addition when configprop:server.ssl.enabled[] is set to `true`, Micrometer's `JettySslHandshakeMetrics`.
 
 
 
