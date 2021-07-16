@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package smoketest.data.jpa.service;
+package org.springframework.boot.test.autoconfigure.webservices.server;
 
-import smoketest.data.jpa.domain.City;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.Repository;
-
-public interface CityRepository extends Repository<City, Long> {
-
-	Page<City> findAll(Pageable pageable);
-
-	Page<City> findByNameContainingAndCountryContainingAllIgnoringCase(String name, String country, Pageable pageable);
-
-	City findByNameAndCountryAllIgnoringCase(String name, String country);
+/**
+ * Example {@link SpringBootApplication @SpringBootApplication} used with
+ * {@link WebServiceServerTest @WebServiceServerTest} tests.
+ *
+ * @author Daniil Razorenov
+ */
+@SpringBootApplication
+public class ExampleWebServiceServerApplication {
 
 }

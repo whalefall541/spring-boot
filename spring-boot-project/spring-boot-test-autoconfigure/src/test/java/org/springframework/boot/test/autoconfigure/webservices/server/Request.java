@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package smoketest.data.jpa.service;
+package org.springframework.boot.test.autoconfigure.webservices.server;
 
-import smoketest.data.jpa.domain.City;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.Repository;
+/**
+ * Test request.
+ *
+ * @author Daniil Razorenov
+ */
+@XmlRootElement(name = "request")
+class Request {
 
-public interface CityRepository extends Repository<City, Long> {
-
-	Page<City> findAll(Pageable pageable);
-
-	Page<City> findByNameContainingAndCountryContainingAllIgnoringCase(String name, String country, Pageable pageable);
-
-	City findByNameAndCountryAllIgnoringCase(String name, String country);
+	@XmlElement(required = true)
+	private String message;
 
 }

@@ -1372,10 +1372,10 @@ bom {
 			]
 		}
 	}
-	library("Prometheus PushGateway", "0.11.0") {
+	library("Prometheus Client", "0.11.0") {
 		group("io.prometheus") {
-			modules = [
-				"simpleclient_pushgateway"
+			imports = [
+				"simpleclient_bom"
 			]
 		}
 	}
@@ -1687,7 +1687,7 @@ bom {
 			]
 		}
 	}
-	library("Spring HATEOAS", "1.4.0-SNAPSHOT") {
+	library("Spring HATEOAS", "1.4.0-M1") {
 		group("org.springframework.hateoas") {
 			modules = [
 				"spring-hateoas"
