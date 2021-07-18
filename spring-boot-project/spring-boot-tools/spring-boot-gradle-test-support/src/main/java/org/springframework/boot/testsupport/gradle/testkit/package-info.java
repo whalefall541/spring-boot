@@ -14,20 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.boot.docs.features.testing.springbootapplications.autoconfiguredwebservices;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement(name = "response")
-@XmlAccessorType(XmlAccessType.FIELD)
-class Response {
-
-	private int status;
-
-	int getStatus() {
-		return this.status;
-	}
-
-}
+/**
+ * Classes for testing with Gradle.
+ */
+package org.springframework.boot.testsupport.gradle.testkit;

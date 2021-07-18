@@ -14,23 +14,27 @@
  * limitations under the License.
  */
 
-package org.springframework.boot.docs.features.testing.springbootapplications.autoconfiguredwebservices;
+package org.springframework.boot.test.autoconfigure.webservices.server;
 
-import org.springframework.boot.webservices.client.WebServiceTemplateBuilder;
-import org.springframework.stereotype.Service;
-import org.springframework.ws.client.core.WebServiceTemplate;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@Service
-public class SomeWebService {
+/**
+ * Test response.
+ *
+ * @author Daniil Razorenov
+ */
+@XmlRootElement(name = "response")
+class Response {
 
-	private final WebServiceTemplate webServiceTemplate;
+	@XmlElement(required = true)
+	private int code;
 
-	public SomeWebService(WebServiceTemplateBuilder builder) {
-		this.webServiceTemplate = builder.build();
+	Response(int code) {
+		this.code = code;
 	}
 
-	public Response test() {
-		return (Response) this.webServiceTemplate.marshalSendAndReceive("https://example.com", new Request());
+	Response() {
 	}
 
 }
